@@ -4,7 +4,9 @@ import java.net.Socket;
 
 public class BuyEvent extends Event {
   @Override
-  public void handle(final Socket CLIENT) {
-    this.request(Option.BUY, CLIENT);
+  public byte[] handle(final Socket CLIENT) {
+    super.request(Option.BUY, CLIENT);
+
+    return super.response(CLIENT);
   }
 }

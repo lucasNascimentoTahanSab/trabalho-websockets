@@ -4,7 +4,9 @@ import java.net.Socket;
 
 public class InspectEvent extends Event {
   @Override
-  public void handle(final Socket CLIENT) {
-    this.request(Option.INSPECT, CLIENT);
+  public byte[] handle(final Socket CLIENT) {
+    super.request(Option.INSPECT, CLIENT);
+
+    return super.response(CLIENT);
   }
 }

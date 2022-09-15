@@ -19,15 +19,13 @@ public class Server {
       this.server = new ServerSocket(this.port);
 
       System.out.println("Listening on port " + this.port + "...");
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException error) {
+      error.printStackTrace();
     }
   }
 
   void openConnections() {
-    while (true) {
-      openConnection();
-    }
+    while (true) { openConnection(); }
   }
 
   void openConnection() {
@@ -35,8 +33,8 @@ public class Server {
       (new Connection(this.server.accept())).start();
 
       System.out.println("New connection accepted...");
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException error) {
+      error.printStackTrace();
     }
   }
 }

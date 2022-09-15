@@ -15,19 +15,13 @@ public class Connection extends Thread {
   }
 
   void initializeClientOutputStream() {
-    try {
-      this.clientOutputStream = this.client.getOutputStream();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    try { this.clientOutputStream = this.client.getOutputStream(); } 
+    catch (IOException error) { error.printStackTrace(); }
   }
 
   void initializeClientInputStream() {
-    try {
-      this.clientInputStream = this.client.getInputStream();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    try { this.clientInputStream = this.client.getInputStream(); } 
+    catch (IOException error) { error.printStackTrace(); }
   }
 
   public void run() {

@@ -15,18 +15,15 @@ public class Client {
   }
 
   void stablishConnection(final String HOST, final Integer PORT) {
-    try {
-      this.client = new Socket(HOST, PORT);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    try { this.client = new Socket(HOST, PORT); } 
+    catch (IOException error) { error.printStackTrace(); }
   }
 
   void communicate() {
     Integer optionId = readInteger();
 
     do {
-      Option.triggerEventFor(optionId).handle(this.client);
+      byte[] response = Option.triggerEventFor(optionId).handle(this.client);
     } while ((optionId = readInteger()) != Option.CANCEL.id);
   }
 
