@@ -16,7 +16,7 @@ public class Connection extends Thread {
 
   void initializeClientOutputStream() {
     try {
-      this.clientInputStream = this.client.getInputStream();
+      this.clientOutputStream = this.client.getOutputStream();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -31,5 +31,17 @@ public class Connection extends Thread {
   }
 
   public void run() {
+    Integer optionId = Option.LISTENING.id;
+
+    while ((optionId = this.readInteger()) != Option.CANCEL.id) {
+      Option.triggerEventFor(optionId).handle(this.client);
+    }
+  }
+
+  Integer readInteger() {
+    try { return this.clientInputStream.read(); } 
+    catch (IOException error) { }
+
+    return 0;
   }
 }
