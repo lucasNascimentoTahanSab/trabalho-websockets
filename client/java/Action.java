@@ -3,7 +3,7 @@ package client.java;
 import java.net.*;
 import java.io.*;
 
-public class Event {
+public class Action {
   /**
    * Método responsável pela execução da opção escolhida pelo cliente em
    * comunicação com o servidor.

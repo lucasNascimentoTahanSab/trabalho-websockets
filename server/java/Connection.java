@@ -35,7 +35,7 @@ public class Connection extends Thread {
     Integer optionId = Option.LISTENING.id;
 
     while ((optionId = this.readInteger()) != Option.CANCEL.id) {
-      Option.triggerEventFor(optionId).handle(this.client);
+      Option.triggerActionFor(optionId).handle(this.client);
     }
   }
 

@@ -3,7 +3,7 @@ package server.java;
 import java.net.*;
 import java.io.*;
 
-public class Event {
+public class Action {
   /**
    * Método responsável pelo envio de resposta ao cliente quanto à requisição
    * realizada.

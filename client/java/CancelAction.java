@@ -2,14 +2,14 @@ package client.java;
 
 import java.net.Socket;
 
-public class InspectEvent extends Event {
+public class CancelAction extends Action {
   /**
    * Método responsável por lidar com as requisições por parte do cliente ao
-   * servidor, retornando a resposta obtida para inpeção do evento.
+   * servidor, retornando a resposta obtida para cancelamento.
    */
   @Override
   public String handle(final Socket CLIENT) {
-    super.request(Option.INSPECT, CLIENT);
+    super.request(Option.CANCEL, CLIENT);
 
     return super.response(CLIENT);
   }

@@ -19,11 +19,17 @@ public enum Option {
    * @param ID
    * @return
    */
-  public static Event triggerEventFor(final Integer ID) {
-    if (ID == Option.SHOW.id) { return new ShowEvent(); }
-    if (ID == Option.INSPECT.id) { return new InspectEvent(); }
-    if (ID == Option.BUY.id) { return new BuyEvent(); }
+  public static Action triggerActionFor(final Integer ID) {
+    if (ID == Option.SHOW.id) {
+      return new ShowAction();
+    }
+    if (ID == Option.INSPECT.id) {
+      return new InspectAction();
+    }
+    if (ID == Option.BUY.id) {
+      return new BuyAction();
+    }
 
-    return new CancelEvent();
+    return new CancelAction();
   }
 }

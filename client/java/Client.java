@@ -21,7 +21,7 @@ public class Client {
     Integer optionId = this.readInteger();
 
     do {
-      this.handleResponse(Option.triggerEventFor(optionId).handle(this.client));
+      this.handleResponse(Option.triggerActionFor(optionId).handle(this.client));
     } while ((optionId = this.readInteger()) != Option.CANCEL.id);
   }
 
