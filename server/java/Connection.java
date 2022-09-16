@@ -5,25 +5,32 @@ import java.io.*;
 
 public class Connection extends Thread {
   Socket client;
-  OutputStream clientOutputStream;
-  InputStream clientInputStream;
+  DataOutputStream clientOutputStream;
+  DataInputStream clientInputStream;
 
   public Connection(final Socket CLIENT) {
-    this.client = CLIENT;
-    this.initializeClientInputStream();
-    this.initializeClientOutputStream();
+    this.stablishConnection(CLIENT);
   }
 
-  void initializeClientOutputStream() {
-    try { this.clientOutputStream = this.client.getOutputStream(); } 
-    catch (IOException error) { error.printStackTrace(); }
+  /**
+   * Método responsável por estabelecer conexão com o cliente recebido.
+   * 
+   * @param CLIENT
+   */
+  void stablishConnection(final Socket CLIENT) {
+    try {
+      this.client = CLIENT;
+      this.clientOutputStream = new DataOutputStream(this.client.getOutputStream());
+      this.clientInputStream = new DataInputStream(this.client.getInputStream());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
-  void initializeClientInputStream() {
-    try { this.clientInputStream = this.client.getInputStream(); } 
-    catch (IOException error) { error.printStackTrace(); }
-  }
-
+  /**
+   * Método executado na recepção do cliente para responder às opções
+   * selecionadas.
+   */
   public void run() {
     Integer optionId = Option.LISTENING.id;
 
@@ -32,9 +39,17 @@ public class Connection extends Thread {
     }
   }
 
+  /**
+   * Método responsável pela leitura de um inteiro do cliente.
+   * 
+   * @return
+   */
   Integer readInteger() {
-    try { return this.clientInputStream.read(); } 
-    catch (IOException error) { }
+    try {
+      return this.clientInputStream.readInt();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     return 0;
   }

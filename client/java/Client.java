@@ -42,7 +42,7 @@ public class Client {
   Integer readInteger() {
     try {
       return Integer.valueOf(READER.readLine());
-    } catch (NumberFormatException | IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
 

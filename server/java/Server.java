@@ -24,10 +24,20 @@ public class Server {
     }
   }
 
+  /**
+   * Método responsável pela disponibilização do servidor para recepção de novas
+   * conexões com clientes.
+   */
   void openConnections() {
-    while (true) { openConnection(); }
+    while (true) {
+      openConnection();
+    }
   }
 
+  /**
+   * Método responsável pela abertura de conexão com cliente e atribuição do
+   * cliente a uma nova thread.
+   */
   void openConnection() {
     try {
       (new Connection(this.server.accept())).start();
