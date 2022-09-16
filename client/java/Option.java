@@ -12,11 +12,18 @@ public enum Option {
     this.id = ID;
   }
 
+  /**
+   * Método responsável pela obtenção do evento correspondente à opção escolhida
+   * pelo cliente para requisição ao servidor.
+   * 
+   * @param ID
+   * @return
+   */
   public static Event triggerEventFor(final Integer ID) {
     if (ID == Option.SHOW.id) { return new ShowEvent(); }
     if (ID == Option.INSPECT.id) { return new InspectEvent(); }
     if (ID == Option.BUY.id) { return new BuyEvent(); }
-    
+
     return new CancelEvent();
   }
 }

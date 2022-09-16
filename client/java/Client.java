@@ -14,23 +14,55 @@ public class Client {
     this.communicate();
   }
 
-  void stablishConnection(final String HOST, final Integer PORT) {
-    try { this.client = new Socket(HOST, PORT); } 
-    catch (IOException error) { error.printStackTrace(); }
-  }
-
+  /**
+   * Método responsável pela comunicação entre cliente e servidor.
+   */
   void communicate() {
-    Integer optionId = readInteger();
+    Integer optionId = this.readInteger();
 
     do {
-      byte[] response = Option.triggerEventFor(optionId).handle(this.client);
-    } while ((optionId = readInteger()) != Option.CANCEL.id);
+      this.handleResponse(Option.triggerEventFor(optionId).handle(this.client));
+    } while ((optionId = this.readInteger()) != Option.CANCEL.id);
   }
 
+  /**
+   * Método responsável por lidar com o corpo da resposta obtida.
+   * 
+   * @param RESPONSE
+   */
+  void handleResponse(final String RESPONSE) {
+    System.out.println(RESPONSE);
+  }
+
+  /**
+   * Método responsável pela leitura de um inteiro do terminal.
+   * 
+   * @return
+   */
   Integer readInteger() {
-    try { return READER.read(); } 
-    catch (IOException error) { }
+    try {
+      return Integer.valueOf(READER.readLine());
+    } catch (NumberFormatException | IOException e) {
+      e.printStackTrace();
+    }
 
     return 0;
+  }
+
+  /**
+   * Método responsável pelo estabelecimento de conexão com o servidor em
+   * host:port.
+   * 
+   * @param HOST
+   * @param PORT
+   */
+  void stablishConnection(final String HOST, final Integer PORT) {
+    try {
+      this.client = new Socket(HOST, PORT);
+
+      System.out.println("Connection stablished...");
+    } catch (IOException error) {
+      error.printStackTrace();
+    }
   }
 }
