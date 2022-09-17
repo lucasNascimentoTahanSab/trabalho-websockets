@@ -41,6 +41,8 @@ public class Client {
    */
   Integer readInteger() {
     try {
+      System.out.print("Número da opção: ");
+
       return Integer.valueOf(READER.readLine());
     } catch (IOException e) {
       e.printStackTrace();

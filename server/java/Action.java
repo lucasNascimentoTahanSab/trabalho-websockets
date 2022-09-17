@@ -5,6 +5,22 @@ import java.io.*;
 
 public class Action {
   /**
+   * Método responsável por receber requisições do cliente.
+   * 
+   * @param CLIENT
+   * @returns
+   */
+  protected String request(final Socket CLIENT) {
+    try {
+      return (new DataInputStream(CLIENT.getInputStream())).readUTF();
+    } catch (IOException error) {
+      error.printStackTrace();
+    }
+
+    return "";
+  }
+
+  /**
    * Método responsável pelo envio de resposta ao cliente quanto à requisição
    * realizada.
    * 
