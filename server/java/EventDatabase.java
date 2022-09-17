@@ -6,16 +6,22 @@ import java.time.*;
 public class EventDatabase {
   static Map<String, Event> eventsByName;
 
+  /**
+   * Método responsável pela criação da base de dados e inserção dos
+   * eventos.
+   * 
+   * @return
+   */
   public static Map<String, Event> createDatabase() {
     eventsByName = new HashMap<String, Event>() {
       {
-        put("Visita Gratuita ao Parque Municipal Américo Renné Giannetti", new Event(
+        put("Visita Gratuita ao Parque Municipal Americo Renne Giannetti", new Event(
             "155119",
             LocalDate.of(2022, 9, 16),
             LocalDate.of(2022, 10, 16),
             0.0,
             2,
-            "Visita Gratuita ao Parque Municipal Américo Renné Giannetti",
+            "Visita Gratuita ao Parque Municipal Americo Renne Giannetti",
             "O Parque Municipal Américo Renné Giannetti funciona de terça a domingo, das 8h às 17h.",
             "Parque Municipal Américo Renné Giannetti",
             "Av. Afonso Pena, 1377, Belo Horizonte - Minas Gerais",
@@ -114,28 +120,28 @@ public class EventDatabase {
             "Itatiba",
             "São Paulo",
             "13254-762"));
-        put("Museu da Língua Portuguesa", new Event(
+        put("Museu da Lingua Portuguesa", new Event(
             "155698",
             LocalDate.of(2022, 9, 6),
             LocalDate.of(2022, 9, 30),
             20.0,
             2,
-            "Museu da Língua Portuguesa",
+            "Museu da Lingua Portuguesa",
             "Venha conhecer as novas experiências da nossa exposição principal!",
-            "Museu da Língua Portuguesa",
+            "Museu da Lingua Portuguesa",
             "Praça da Luz, s/nº - Centro Histórico de São Paulo, São Paulo - SP, 01120-010",
             "",
             "Centro Histórico de São Paulo",
             "São Paulo",
             "São Paulo",
             "01120-010"));
-        put("PATATI PATATÁ CIRCO SHOW | TATUAPÉ", new Event(
+        put("PATATI PATATA CIRCO SHOW | TATUAPE", new Event(
             "158024",
             LocalDate.of(2022, 9, 17),
             LocalDate.of(2022, 10, 2),
             180.0,
             3,
-            "PATATI PATATÁ CIRCO SHOW | TATUAPÉ",
+            "PATATI PATATA CIRCO SHOW | TATUAPE",
             "A ALEGRIA ESTÁ DE VOLTA!",
             "PATATI PATATA CIRCO SHOW",
             "R. Uriel Gaspar, 149 - Belenzinho, São Paulo - SP, 03301-000",
@@ -165,6 +171,12 @@ public class EventDatabase {
     return eventsByName;
   }
 
+  /**
+   * Método responsável pela obtenção dos eventos cadastrados na base
+   * de dados.
+   * 
+   * @return
+   */
   public static String getEvents() {
     String message = "";
     Collection<Event> events = eventsByName.values();
@@ -182,6 +194,13 @@ public class EventDatabase {
     return message;
   }
 
+  /**
+   * Método responsável pela obtenção do evento correspondente ao nome
+   * recebido.
+   * 
+   * @param EVENT_NAME
+   * @return
+   */
   public static String getEventByName(final String EVENT_NAME) {
     if (!eventsByName.containsKey(EVENT_NAME)) {
       return "Este evento não foi encontrado...";
@@ -202,6 +221,13 @@ public class EventDatabase {
         "Preço: R$" + event.price + "\n\n";
   }
 
+  /**
+   * Método responsável pela compra de ingresso para o evento correspondente
+   * ao nome recebido.
+   * 
+   * @param EVENT_NAME
+   * @return
+   */
   public static String buyTicketFor(final String EVENT_NAME) {
     if (!eventsByName.containsKey(EVENT_NAME)) {
       return "Este evento não foi encontrado...";

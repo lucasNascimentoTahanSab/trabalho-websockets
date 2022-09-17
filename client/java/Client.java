@@ -1,12 +1,9 @@
 package client.java;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class Client {
-  final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
   Socket client;
 
   public Client(final String HOST, final Integer PORT) {
@@ -18,11 +15,13 @@ public class Client {
    * Método responsável pela comunicação entre cliente e servidor.
    */
   void communicate() {
-    String option = this.readOption();
+    this.showOptions();
+    String option = Utils.readLine("Número da opção: ");
 
     while (option != null && option.compareTo(Option.CANCEL.id) != 0) {
       this.handleResponse(Option.triggerActionFor(option).handle(this.client));
-      option = this.readOption();
+      this.showOptions();
+      option = Utils.readLine("Número da opção: ");
     }
 
     this.close();
@@ -46,24 +45,15 @@ public class Client {
       return;
     }
 
-    System.out.println(RESPONSE);
+    System.out.println("\n" + RESPONSE + "\n");
   }
 
-  /**
-   * Método responsável pela leitura de um inteiro do terminal.
-   * 
-   * @return
-   */
-  String readOption() {
-    try {
-      System.out.print("Número da opção: ");
-
-      return READER.readLine();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    return "";
+  void showOptions() {
+    System.out.println("Opções: \n\n" +
+        "1. Apresentar eventos\n" +
+        "2. Apresentar detalhes de um evento\n" +
+        "3. Comprar ingresso para evento\n" +
+        "4. Sair\n");
   }
 
   /**
@@ -77,7 +67,7 @@ public class Client {
     try {
       this.client = new Socket(HOST, PORT);
 
-      System.out.println("Connection stablished...");
+      System.out.println("\nBem vindo ao evento.com!\n");
     } catch (IOException error) {
       error.printStackTrace();
     }

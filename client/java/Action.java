@@ -7,7 +7,7 @@ public class Action {
   /**
    * Método responsável pelo envio de mensagem do cliente ao servidor.
    * 
-   * @param OPTION
+   * @param MESSAGE
    * @param CLIENT
    */
   protected void request(final String MESSAGE, final Socket CLIENT) {
