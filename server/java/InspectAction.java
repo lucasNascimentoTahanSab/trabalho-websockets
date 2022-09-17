@@ -9,6 +9,8 @@ public class InspectAction extends Action {
    */
   @Override
   public void handle(final Socket CLIENT) {
-    super.response("", CLIENT);
+    String eventName = super.request(CLIENT);
+
+    super.response(EventDatabase.getEventByName(eventName), CLIENT);
   }
 }

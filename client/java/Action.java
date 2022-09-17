@@ -20,6 +20,20 @@ public class Action {
   }
 
   /**
+   * Método responsável pelo envio de texto ao servidor.
+   * 
+   * @param TEXT
+   * @param CLIENT
+   */
+  protected void request(final String TEXT, final Socket CLIENT) {
+    try {
+      (new DataOutputStream(CLIENT.getOutputStream())).writeUTF(TEXT);
+    } catch (IOException error) {
+      error.printStackTrace();
+    }
+  }
+
+  /**
    * Método responsável pela obtenção de resposta do servidor quanto à requisição
    * realizada pelo cliente.
    * 

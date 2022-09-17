@@ -9,6 +9,6 @@ public class ShowAction extends Action {
    */
   @Override
   public void handle(final Socket CLIENT) {
-    super.response("Olá esta é uma mensagem de teste.", CLIENT);
+    super.response(EventDatabase.getEvents(), CLIENT);
   }
 }
