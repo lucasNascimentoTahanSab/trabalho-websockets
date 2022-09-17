@@ -5,29 +5,14 @@ import java.io.*;
 
 public class Action {
   /**
-   * Método responsável pela execução da opção escolhida pelo cliente em
-   * comunicação com o servidor.
+   * Método responsável pelo envio de mensagem do cliente ao servidor.
    * 
    * @param OPTION
    * @param CLIENT
    */
-  protected void request(final Option OPTION, final Socket CLIENT) {
+  protected void request(final String MESSAGE, final Socket CLIENT) {
     try {
-      (new DataOutputStream(CLIENT.getOutputStream())).writeInt(OPTION.id);
-    } catch (IOException error) {
-      error.printStackTrace();
-    }
-  }
-
-  /**
-   * Método responsável pelo envio de texto ao servidor.
-   * 
-   * @param TEXT
-   * @param CLIENT
-   */
-  protected void request(final String TEXT, final Socket CLIENT) {
-    try {
-      (new DataOutputStream(CLIENT.getOutputStream())).writeUTF(TEXT);
+      (new DataOutputStream(CLIENT.getOutputStream())).writeUTF(MESSAGE);
     } catch (IOException error) {
       error.printStackTrace();
     }

@@ -18,11 +18,22 @@ public class Client {
    * Método responsável pela comunicação entre cliente e servidor.
    */
   void communicate() {
-    Integer optionId = this.readInteger();
+    String option = this.readOption();
 
-    do {
-      this.handleResponse(Option.triggerActionFor(optionId).handle(this.client));
-    } while ((optionId = this.readInteger()) != Option.CANCEL.id);
+    while (option != null && option.compareTo(Option.CANCEL.id) != 0) {
+      this.handleResponse(Option.triggerActionFor(option).handle(this.client));
+      option = this.readOption();
+    }
+
+    this.close();
+  }
+
+  void close() {
+    try {
+      this.client.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -31,6 +42,10 @@ public class Client {
    * @param RESPONSE
    */
   void handleResponse(final String RESPONSE) {
+    if (RESPONSE == null || RESPONSE.isEmpty()) {
+      return;
+    }
+
     System.out.println(RESPONSE);
   }
 
@@ -39,16 +54,16 @@ public class Client {
    * 
    * @return
    */
-  Integer readInteger() {
+  String readOption() {
     try {
       System.out.print("Número da opção: ");
 
-      return Integer.valueOf(READER.readLine());
+      return READER.readLine();
     } catch (IOException e) {
       e.printStackTrace();
     }
 
-    return 0;
+    return "";
   }
 
   /**

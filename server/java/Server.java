@@ -40,9 +40,10 @@ public class Server {
    */
   void openConnection() {
     try {
-      (new Connection(this.server.accept())).start();
+      Socket client = this.server.accept();
+      System.out.println("Connection stablished with " + client.toString() + "...");
 
-      System.out.println("New connection accepted...");
+      (new Connection(client)).start();
     } catch (IOException error) {
       error.printStackTrace();
     }

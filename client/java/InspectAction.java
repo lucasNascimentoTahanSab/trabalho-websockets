@@ -14,7 +14,7 @@ public class InspectAction extends Action {
    */
   @Override
   public String handle(final Socket CLIENT) {
-    super.request(Option.INSPECT, CLIENT);
+    super.request(Option.INSPECT.id, CLIENT);
     super.request(this.readLine(), CLIENT);
 
     return super.response(CLIENT);
@@ -27,6 +27,8 @@ public class InspectAction extends Action {
    */
   String readLine() {
     try {
+      System.out.print("Nome do evento: ");
+
       return READER.readLine();
     } catch (IOException e) {
       e.printStackTrace();

@@ -32,10 +32,25 @@ public class Connection extends Thread {
    * selecionadas.
    */
   public void run() {
-    Integer optionId = Option.LISTENING.id;
+    String option = this.readOption();
 
-    while ((optionId = this.readInteger()) != Option.CANCEL.id) {
-      Option.triggerActionFor(optionId).handle(this.client);
+    while (option != null && option.compareTo(Option.CANCEL.id) != 0) {
+      Option.triggerActionFor(option).handle(this.client);
+      option = this.readOption();
+    }
+
+    this.close();
+  }
+
+  void close() {
+    try {
+      System.out.println("Closed connection with " + this.client.toString() + "...");
+
+      this.client.close();
+      this.clientInputStream.close();
+      this.clientOutputStream.close();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 
@@ -44,13 +59,11 @@ public class Connection extends Thread {
    * 
    * @return
    */
-  Integer readInteger() {
+  String readOption() {
     try {
-      return this.clientInputStream.readInt();
+      return this.clientInputStream.readUTF();
     } catch (IOException e) {
-      e.printStackTrace();
+      return Option.CANCEL.id;
     }
-
-    return 0;
   }
 }

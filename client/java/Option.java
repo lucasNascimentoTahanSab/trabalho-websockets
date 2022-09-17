@@ -1,14 +1,14 @@
 package client.java;
 
 public enum Option {
-  SHOW(1),
-  INSPECT(2),
-  BUY(3),
-  CANCEL(4);
+  SHOW("1"),
+  INSPECT("2"),
+  BUY("3"),
+  CANCEL("4");
 
-  public Integer id;
+  public String id;
 
-  Option(final Integer ID) {
+  Option(final String ID) {
     this.id = ID;
   }
 
@@ -19,17 +19,21 @@ public enum Option {
    * @param ID
    * @return
    */
-  public static Action triggerActionFor(final Integer ID) {
-    if (ID == Option.SHOW.id) {
+  public static Action triggerActionFor(final String ID) {
+    if (ID == null) {
+      return new Action();
+    }
+
+    if (ID.compareTo(Option.SHOW.id) == 0) {
       return new ShowAction();
     }
-    if (ID == Option.INSPECT.id) {
+    if (ID.compareTo(Option.INSPECT.id) == 0) {
       return new InspectAction();
     }
-    if (ID == Option.BUY.id) {
+    if (ID.compareTo(Option.BUY.id) == 0) {
       return new BuyAction();
     }
 
-    return new CancelAction();
+    return new Action();
   }
 }

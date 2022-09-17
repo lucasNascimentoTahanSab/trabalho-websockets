@@ -14,7 +14,7 @@ public class BuyAction extends Action {
    */
   @Override
   public String handle(final Socket CLIENT) {
-    super.request(Option.BUY, CLIENT);
+    super.request(Option.BUY.id, CLIENT);
     super.request(this.readLine(), CLIENT);
 
     return super.response(CLIENT);

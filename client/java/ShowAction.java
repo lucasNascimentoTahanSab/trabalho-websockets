@@ -9,7 +9,7 @@ public class ShowAction extends Action {
    */
   @Override
   public String handle(final Socket CLIENT) {
-    super.request(Option.SHOW, CLIENT);
+    super.request(Option.SHOW.id, CLIENT);
 
     return super.response(CLIENT);
   }
